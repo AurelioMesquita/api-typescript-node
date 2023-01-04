@@ -1,11 +1,9 @@
-const express = require('express')
+import express from "express";
 
-const app = express()
+const server = express();
 
-app.get('/', (req, res) => {
-    return res.json({ message: 'oieee' })
-})
+server.get("/", (request, response) => {
+    return response.send("Hello, welcome to my API REST!");
+});
 
-
-
-app.listen(3434, () => { console.log('running') })
+export default server;
