@@ -7,6 +7,7 @@ server.use(express.json())
 
 const projects: any = []
 
+server.use(logRoutes)
 server.get("/", (request, response) => {
     return response.send("Hello, welcome to my API REST!");
 });
@@ -49,4 +50,10 @@ server.delete("/projects/:id", (request, response) => {
     return response.status(204).send()
 })
 
+function logRoutes(request: any, response: any, next: any) {
+    const { method, url } = request;
+    const route = `[${method.toUpperCase()}] ${url}`
+    console.log(route)
+    return next()
+}
 export default server;
