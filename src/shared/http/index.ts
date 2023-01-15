@@ -5,7 +5,7 @@ const server = express();
 
 server.use(express.json())
 
-const projects: any = []
+const projects: Array<object> = []
 
 server.use(logRoutes)
 server.get("/", (request, response) => {
