@@ -2,18 +2,16 @@ import express from "express";
 import "express-async-errors";
 import cors from "cors";
 const { v4: uuidv4 } = require("uuid");
-
+import { routes } from "./routes";
 const server = express();
 
 server.use(express.json());
 server.use(cors());
+server.use(routes);
+
 const projects: Array<object> = [];
 
 server.use(logRoutes);
-
-server.get("/", (request, response) => {
-    return response.send("Hello, welcome to my API REST!");
-});
 
 server.get("/projects", (request, response) => {
     return response.json(projects);

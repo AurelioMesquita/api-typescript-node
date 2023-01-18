@@ -1,5 +1,6 @@
+import "dotenv/config";
 import server from "./index";
 
-server.listen(8001, () => {
+server.listen(process.env.PORT, () => {
     console.log("running");
 });
