@@ -8,7 +8,7 @@
     "build": "rimraf dist && npx tsc",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/app.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/node": "^18.11.18",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
