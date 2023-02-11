@@ -5,12 +5,11 @@ const rolesRouter = Router();
 
 const roles = [];
 
-rolesRouter.post("/", (request, response) => {
-    const oi = request.body;
-    console.log(oi);
+rolesRouter.post("/", (res, response) => {
+    const { name } = res.body;
     const role = {
+        name: name,
         id: uuidv4(),
-        // name,
         created_at: new Date(),
     };
 
