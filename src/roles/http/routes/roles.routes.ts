@@ -1,8 +1,7 @@
-import { CreateRoleController } from "@roles/useCases/createRole/createRoleController";
+import { createRolesController } from "@roles/useCases/createRole";
 import { Router } from "express";
 
 const rolesRouter = Router();
-const createRolesController = new CreateRoleController();
 
 rolesRouter.post("/", (request, response) => {
     return createRolesController.handle(request, response);
