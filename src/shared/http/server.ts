@@ -3,12 +3,15 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import cors from "cors";
 import { routes } from "./routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "../../swagger.json";
 import { AppError } from "@shared/errors/AppError";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(routes);
 
 app.use(
