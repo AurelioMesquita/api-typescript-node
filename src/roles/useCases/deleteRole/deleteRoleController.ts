@@ -7,6 +7,6 @@ export class DeleteRoleController {
         const { id } = request.params;
         await this.deleteRoleUseCase.execute({ id });
 
-        return response.status(204).json();
+        return response.status(204).send();
     }
 }
