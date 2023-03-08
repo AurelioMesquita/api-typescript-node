@@ -135,7 +135,11 @@
                 "type": "object",
                 "properties": { "name": { "type": "string" } }
               },
-              "example": "Administrador"
+              "example": {
+                "id": "4894caf8-13a8-4f33-99a9-7e236314e4ce",
+                "name": "Administrator",
+                "created_at": "2023-03-07T00:20:01.000Z"
+              }
             }
           }
         },
@@ -157,6 +161,57 @@
                       "type": "string"
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Nod found."
+          }
+        }
+      },
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Find roles by ID.",
+        "description": "Returns roles based ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Indentify of a role",
+            "required": true,
+            "schema": {
+              "type": "uuid"
+            },
+            "style": "label"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "4894caf8-13a8-4f33-99a9-7e236314e4ce",
+                  "name": "Administrator",
+                  "created_at": "2023-03-07T00:20:01.000Z"
                 }
               }
             }
