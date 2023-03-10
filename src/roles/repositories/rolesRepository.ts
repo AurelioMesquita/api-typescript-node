@@ -1,35 +1,20 @@
 import { Role } from "@roles/entities/roles";
 import { dataSource } from "@shared/typeorm";
 import { Repository } from "typeorm";
-type CreateRoleDTO = {
-    name: string;
-};
-export type PaginateParams = {
-    page: number;
-    skip: number;
-    take: number;
-};
+import {
+    CreateRoleDTO,
+    IRolesRepository,
+    PaginateParams,
+    RolesPaginateProperties,
+} from "./iRolesRepository";
 
-export type RolesPaginateProperties = {
-    perPage: number;
-    total: number;
-    currentPage: number;
-    data: Role[];
-};
-export class RepositoryRoles {
+export class RepositoryRoles implements IRolesRepository {
     private repository: Repository<Role>;
-    private static INSTANCE: RepositoryRoles;
 
-    private constructor() {
+    constructor() {
         this.repository = dataSource.getRepository(Role);
     }
 
-    public static getInstance(): RepositoryRoles {
-        if (!RepositoryRoles.INSTANCE) {
-            RepositoryRoles.INSTANCE = new RepositoryRoles();
-        }
-        return RepositoryRoles.INSTANCE;
-    }
     async create({ name }: CreateRoleDTO): Promise<Role> {
         const role = this.repository.create({ name });
         return this.repository.save(role);
