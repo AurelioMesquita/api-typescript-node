@@ -1,12 +1,17 @@
-import { createRolesController } from "@roles/useCases/createRole";
-import { deleteRolesController } from "@roles/useCases/deleteRole";
-import { listRolesController } from "@roles/useCases/listRoles";
-import { showRolesController } from "@roles/useCases/showRole";
-import { updateRolesController } from "@roles/useCases/updateRole";
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
-
+import { CreateRoleController } from "@roles/useCases/createRole/createRoleController";
+import { container } from "tsyringe";
+import { ListRolesController } from "@roles/useCases/listRoles/listRolesController";
+import { ShowRoleController } from "@roles/useCases/showRole/showRoleController";
+import { UpdateRoleController } from "@roles/useCases/updateRole/updateRoleController";
+import { DeleteRoleController } from "@roles/useCases/deleteRole/deleteRoleController";
 const rolesRouter = Router();
+const createRoleController = container.resolve(CreateRoleController);
+const listRolesController = container.resolve(ListRolesController);
+const showRoleController = container.resolve(ShowRoleController);
+const updateRoleController = container.resolve(UpdateRoleController);
+const deleteRoleController = container.resolve(DeleteRoleController);
 
 rolesRouter.post(
     "/",
@@ -16,7 +21,7 @@ rolesRouter.post(
         }),
     }),
     (request, response) => {
-        return createRolesController.handle(request, response);
+        return createRoleController.handle(request, response);
     },
 );
 
@@ -41,7 +46,7 @@ rolesRouter.get(
         }),
     }),
     (request, response) => {
-        return showRolesController.handle(request, response);
+        return showRoleController.handle(request, response);
     },
 );
 rolesRouter.put(
@@ -55,7 +60,7 @@ rolesRouter.put(
         }),
     }),
     (request, response) => {
-        return updateRolesController.handle(request, response);
+        return updateRoleController.handle(request, response);
     },
 );
 rolesRouter.delete(
@@ -66,7 +71,7 @@ rolesRouter.delete(
         }),
     }),
     (request, response) => {
-        return deleteRolesController.handle(request, response);
+        return deleteRoleController.handle(request, response);
     },
 );
 
