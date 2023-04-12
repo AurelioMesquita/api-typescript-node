@@ -14,7 +14,7 @@ export type CreateUserDTO = {
 };
 
 @injectable()
-export class CreateUserCase {
+export class CreateUserUseCase {
     constructor(
         @inject("UsersRepository") private UsersRepository: IUsersRepository,
         @inject("RepositoryRoles") private rolesRepository: IRolesRepository,
@@ -32,7 +32,7 @@ export class CreateUserCase {
 
         const role = await this.rolesRepository.findById(roleId);
 
-        if (role) throw new AppError("Role not found ", 404);
+        if (!role) throw new AppError("Role not found ", 404);
 
         const hashedPassword = await hash(password, 10);
 
