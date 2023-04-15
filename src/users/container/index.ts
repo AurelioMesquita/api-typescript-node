@@ -1,8 +1,8 @@
 import { container } from "tsyringe";
 import { IUsersRepository } from "../repositories/IUsersRepository";
 import { UsersRepository } from "../repositories/usersRepository";
-import { CreateUserController } from "../userCases/CreateUser/createUserControler";
-import { ListUsersController } from "../userCases/listUsers/listUsersController";
+import { CreateUserController } from "../useCases/CreateUser/createUserControler";
+import { ListUsersController } from "../useCases/listUsers/listUsersController";
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",

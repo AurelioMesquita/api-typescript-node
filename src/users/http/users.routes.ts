@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
 import { container } from "tsyringe";
-import { CreateUserController } from "../userCases/CreateUser/createUserControler";
-import { ListUsersController } from "../userCases/listUsers/listUsersController";
+import { CreateUserController } from "../useCases/CreateUser/createUserControler";
+import { ListUsersController } from "../useCases/listUsers/listUsersController";
 
 const usersRouter = Router();
 const createUserController = container.resolve(CreateUserController);
