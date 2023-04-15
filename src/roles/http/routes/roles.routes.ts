@@ -6,13 +6,14 @@ import { ListRolesController } from "@roles/useCases/listRoles/listRolesControll
 import { ShowRoleController } from "@roles/useCases/showRole/showRoleController";
 import { UpdateRoleController } from "@roles/useCases/updateRole/updateRoleController";
 import { DeleteRoleController } from "@roles/useCases/deleteRole/deleteRoleController";
+import { isAuthenticated } from "@shared/http/middlewares/isAuthenticated";
 const rolesRouter = Router();
 const createRoleController = container.resolve(CreateRoleController);
 const listRolesController = container.resolve(ListRolesController);
 const showRoleController = container.resolve(ShowRoleController);
 const updateRoleController = container.resolve(UpdateRoleController);
 const deleteRoleController = container.resolve(DeleteRoleController);
-
+rolesRouter.use(isAuthenticated);
 rolesRouter.post(
     "/",
     celebrate({

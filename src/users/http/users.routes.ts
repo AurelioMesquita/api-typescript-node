@@ -4,11 +4,13 @@ import { container } from "tsyringe";
 import { CreateUserController } from "../useCases/CreateUser/createUserControler";
 import { ListUsersController } from "../useCases/listUsers/listUsersController";
 import { CreateLoginController } from "../useCases/createLogin/createLoginController";
+import { isAuthenticated } from "@shared/http/middlewares/isAuthenticated";
 
 const usersRouter = Router();
 const createUserController = container.resolve(CreateUserController);
 const listUsersController = container.resolve(ListUsersController);
 const createLoginController = container.resolve(CreateLoginController);
+usersRouter.use(isAuthenticated);
 usersRouter.post(
     "/",
     celebrate({
