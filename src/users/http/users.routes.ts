@@ -5,12 +5,19 @@ import { CreateUserController } from "../useCases/CreateUser/createUserControler
 import { ListUsersController } from "../useCases/listUsers/listUsersController";
 import { CreateLoginController } from "../useCases/createLogin/createLoginController";
 import { isAuthenticated } from "@shared/http/middlewares/isAuthenticated";
+import multer from "multer";
+import uploadConfig from "@config/upload";
+import { UpdateAvatarController } from "../useCases/updateAvatar/updateAvatarController";
 
 const usersRouter = Router();
+usersRouter.use(isAuthenticated);
+
 const createUserController = container.resolve(CreateUserController);
 const listUsersController = container.resolve(ListUsersController);
 const createLoginController = container.resolve(CreateLoginController);
-usersRouter.use(isAuthenticated);
+const updateAvatarController = container.resolve(UpdateAvatarController);
+const upload = multer(uploadConfig);
+
 usersRouter.post(
     "/",
     celebrate({
@@ -48,6 +55,14 @@ usersRouter.get(
     }),
     (request, response) => {
         return listUsersController.handle(request, response);
+    },
+);
+usersRouter.patch(
+    "/avatar",
+    isAuthenticated,
+    upload.single("avatar"),
+    (request, response) => {
+        return updateAvatarController.handle(request, response);
     },
 );
 export { usersRouter };
