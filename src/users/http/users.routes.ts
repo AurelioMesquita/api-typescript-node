@@ -10,7 +10,6 @@ import uploadConfig from "@config/upload";
 import { UpdateAvatarController } from "../useCases/updateAvatar/updateAvatarController";
 
 const usersRouter = Router();
-usersRouter.use(isAuthenticated);
 
 const createUserController = container.resolve(CreateUserController);
 const listUsersController = container.resolve(ListUsersController);
@@ -20,6 +19,7 @@ const upload = multer(uploadConfig);
 
 usersRouter.post(
     "/",
+    isAuthenticated,
     celebrate({
         [Segments.BODY]: {
             name: Joi.string().required(),
@@ -47,6 +47,7 @@ usersRouter.post(
 );
 usersRouter.get(
     "/",
+    isAuthenticated,
     celebrate({
         [Segments.QUERY]: Joi.object().keys({
             page: Joi.number(),
