@@ -8,6 +8,7 @@ import { isAuthenticated } from "@shared/http/middlewares/isAuthenticated";
 import multer from "multer";
 import uploadConfig from "@config/upload";
 import { UpdateAvatarController } from "../useCases/updateAvatar/updateAvatarController";
+import { ShowProfileController } from "../useCases/ShowProfile/showProfileController";
 
 const usersRouter = Router();
 
@@ -15,6 +16,7 @@ const createUserController = container.resolve(CreateUserController);
 const listUsersController = container.resolve(ListUsersController);
 const createLoginController = container.resolve(CreateLoginController);
 const updateAvatarController = container.resolve(UpdateAvatarController);
+const showProfileController = container.resolve(ShowProfileController);
 const upload = multer(uploadConfig);
 
 usersRouter.post(
@@ -66,4 +68,7 @@ usersRouter.patch(
         return updateAvatarController.handle(request, response);
     },
 );
+usersRouter.get("/profile", isAuthenticated, (request, response) => {
+    return showProfileController.handle(request, response);
+});
 export { usersRouter };
