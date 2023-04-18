@@ -9,6 +9,7 @@ import multer from "multer";
 import uploadConfig from "@config/upload";
 import { UpdateAvatarController } from "../useCases/updateAvatar/updateAvatarController";
 import { ShowProfileController } from "../useCases/ShowProfile/showProfileController";
+import { UpdateProfileController } from "../useCases/UpdateProfile/updateProfileControler";
 
 const usersRouter = Router();
 
@@ -17,6 +18,7 @@ const listUsersController = container.resolve(ListUsersController);
 const createLoginController = container.resolve(CreateLoginController);
 const updateAvatarController = container.resolve(UpdateAvatarController);
 const showProfileController = container.resolve(ShowProfileController);
+const updateProfileController = container.resolve(UpdateProfileController);
 const upload = multer(uploadConfig);
 
 usersRouter.post(
@@ -71,4 +73,25 @@ usersRouter.patch(
 usersRouter.get("/profile", isAuthenticated, (request, response) => {
     return showProfileController.handle(request, response);
 });
+usersRouter.put(
+    "/profile",
+    isAuthenticated,
+    celebrate({
+        [Segments.BODY]: {
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            old_password: Joi.string(),
+            password: Joi.string().optional(),
+            password_confirmation: Joi.string()
+                .valid(Joi.ref("password"))
+                .when("password", {
+                    is: Joi.exist(),
+                    then: Joi.required(),
+                }),
+        },
+    }),
+    (request, response) => {
+        return updateProfileController.handle(request, response);
+    },
+);
 export { usersRouter };

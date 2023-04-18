@@ -31,22 +31,17 @@ export class UpdateProfileUseCase {
         const userUpdateEmail = await this.UsersRepository.findByEmail(email);
 
         if (userUpdateEmail && (await userUpdateEmail).id !== userId)
-            throw new AppError(
-                "There is already one user with this email"
-                400,
-            );
+            throw new AppError("There is already one user with this email");
 
         if (password && old_password) {
-
-            const checkOldPassword = await compare(old_password, user.password)
+            const checkOldPassword = await compare(old_password, user.password);
             if (!checkOldPassword) {
-                throw new AppError("Old password does not match")
+                throw new AppError("Old password does not match");
             }
-            user.password = await hash(password, 10)
+            user.password = await hash(password, 10);
         }
-        user.name = name
-        user.email = email
-        return this.UsersRepository.save(user)
-
+        user.name = name;
+        user.email = email;
+        return this.UsersRepository.save(user);
     }
 }
