@@ -21,6 +21,10 @@ produtosRouter.post(
     celebrate({
         [Segments.BODY]: Joi.object().keys({
             name: Joi.string().required(),
+            sn_estoque: Joi.boolean(),
+            valor: Joi.number(),
+            sn_catalogo: Joi.boolean(),
+            pagina_catalogo: Joi.number(),
         }),
     }),
     (request, response) => {
@@ -60,6 +64,10 @@ produtosRouter.put(
         }),
         [Segments.BODY]: Joi.object().keys({
             name: Joi.string().required(),
+            sn_estoque: Joi.boolean(),
+            valor: Joi.number(),
+            sn_catalogo: Joi.boolean(),
+            pagina_catalogo: Joi.number(),
         }),
     }),
     (request, response) => {

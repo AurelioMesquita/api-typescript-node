@@ -21,7 +21,13 @@ export type ProdutosPaginateProperties = {
 };
 
 export interface IProdutoRepository {
-    create({ name }: CreateProdutoDTO): Promise<Produto>;
+    create({
+        name,
+        sn_estoque,
+        valor,
+        sn_catalogo,
+        pagina_catalogo,
+    }: CreateProdutoDTO): Promise<Produto>;
     save(produto: Produto): Promise<Produto>;
     findAll({
         page,

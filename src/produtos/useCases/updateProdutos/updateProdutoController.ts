@@ -11,7 +11,7 @@ export class UpdateProdutoController {
         const { valor } = request.body;
         const { sn_catalogo } = request.body;
         const { pagina_catalogo } = request.body;
-        const role = await updateProdutoUseCase.execute({
+        const produto = await updateProdutoUseCase.execute({
             id,
             name,
             sn_estoque,
@@ -20,6 +20,6 @@ export class UpdateProdutoController {
             pagina_catalogo,
         });
 
-        return response.status(201).json(role);
+        return response.status(201).json(produto);
     }
 }

@@ -4,7 +4,7 @@ import { User } from "src/users/entities/user";
 import { AppError } from "@shared/errors/AppError";
 import path from "path";
 import uploadConfig from "@config/upload";
-import { fs } from "fs";
+import fs from "fs";
 export type UpdateAvatarDTO = {
     userId: string;
     avatarFileName: string;
@@ -28,11 +28,11 @@ export class UpdateAvatarUseCase {
                 uploadConfig.directory,
                 user.avatar,
             );
-            const userAvatarFileExists = await fs.promise.stat(
+            const userAvatarFileExists = await fs.promises.stat(
                 userAvatarFilePath,
             );
             if (userAvatarFileExists)
-                await fs.promise.unlink(userAvatarFilePath);
+                await fs.promises.unlink(userAvatarFilePath);
         }
         user.avatar = avatarFileName;
         return await this.UsersRepository.save(user);

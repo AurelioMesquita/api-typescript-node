@@ -15,8 +15,20 @@ export class RepositoryProdutos implements IProdutoRepository {
         this.repository = dataSource.getRepository(Produto);
     }
 
-    async create({ name }: CreateProdutoDTO): Promise<Produto> {
-        const produto = this.repository.create({ name });
+    async create({
+        name,
+        sn_estoque,
+        valor,
+        sn_catalogo,
+        pagina_catalogo,
+    }: CreateProdutoDTO): Promise<Produto> {
+        const produto = this.repository.create({
+            name,
+            sn_estoque,
+            valor,
+            sn_catalogo,
+            pagina_catalogo,
+        });
         return this.repository.save(produto);
     }
     async save(produto): Promise<Produto> {

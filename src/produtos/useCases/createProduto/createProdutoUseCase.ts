@@ -1,8 +1,7 @@
-import { Role } from "@roles/entities/roles";
 import { AppError } from "@shared/errors/AppError";
 import { injectable, inject } from "tsyringe";
-import { IRolesRepository } from "@roles/repositories/iRolesRepository";
 import { IProdutoRepository } from "src/produtos/repositories/iProdutosRepository";
+import { Produto } from "src/produtos/entities/produtos";
 
 type CreateProdutoDTO = {
     name: string;
@@ -23,7 +22,7 @@ export class CreateProdutoUseCase {
         valor,
         sn_catalogo,
         pagina_catalogo,
-    }: CreateProdutoDTO): Promise<Role> {
+    }: CreateProdutoDTO): Promise<Produto> {
         const produtoAlreadyExists = await this.produtosRepository.findByName(
             name,
         );
