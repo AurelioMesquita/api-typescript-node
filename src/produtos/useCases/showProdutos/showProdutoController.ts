@@ -6,8 +6,8 @@ export class ShowProdutoController {
     async handle(request: Request, response: Response): Promise<Response> {
         const showProdutoUseCase = container.resolve(ShowProdutoUseCase);
         const { id } = request.params;
-        const role = await showProdutoUseCase.execute({ id });
+        const produto = await showProdutoUseCase.execute({ id });
 
-        return response.status(201).json(role);
+        return response.status(201).json(produto);
     }
 }

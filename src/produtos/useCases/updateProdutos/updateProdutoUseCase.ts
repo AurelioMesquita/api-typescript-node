@@ -1,7 +1,6 @@
-import { Role } from "@roles/entities/roles";
+import { Produto } from "src/produtos/entities/produtos";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
-import { IRolesRepository } from "@roles/repositories/iRolesRepository";
 import { IProdutoRepository } from "src/produtos/repositories/iProdutosRepository";
 
 type UpdateProdutoTO = {
@@ -26,7 +25,7 @@ export class UpdateProdutoUseCase {
         valor,
         sn_catalogo,
         pagina_catalogo,
-    }: UpdateProdutoTO): Promise<Role> {
+    }: UpdateProdutoTO): Promise<Produto> {
         const produto = await this.produtosRepository.findById(id);
         if (!produto) throw new AppError("Product not found", 404);
         const nameExist = await this.produtosRepository.findByName(name);
